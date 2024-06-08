@@ -12,8 +12,7 @@ class ClientTest(unittest.TestCase):
     ]
     """ ------------ Add the assertion below ------------ """
     for quote in quotes:
-      stock, bid_price, ask_price, price = getDataPoint(quote)
-      print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price']) /2))
 
     assert getRatio(quotes[0]['top_ask']['price'], quotes[2]['top_ask']['price']) == 1
     assert getRatio(quotes[1]['top_ask']['price'], quotes[2]['top_ask']['price']) == 1
@@ -31,9 +30,8 @@ class ClientTest(unittest.TestCase):
     """ ------------ Add the assertion below ------------ """
 
     for quote in quotes:
-      stock, bid_price, ask_price, price = getDataPoint(quote)
-      print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
-
+      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'],
+                                             (quote['top_bid']['price'] + quote['top_ask']['price']) / 2))
 
 
 if __name__ == '__main__':
